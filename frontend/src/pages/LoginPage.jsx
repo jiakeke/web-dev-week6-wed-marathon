@@ -2,13 +2,22 @@ import useLogin from '../hooks/useLogin';
 import { useNavigate } from 'react-router-dom';
 
 
-const LoginPage = () => {
-    const {email, password, handleLogin} = useLogin();
+const LoginPage = ({ setIsAuthenticated }) => {
+    
+
+    
+    const {email, password, handleLogin} = useLogin({ setIsAuthenticated });
+
+    console.log('email', email);
+    console.log('password   ', password);
     const navigate = useNavigate();
     const submitForm = async (e) => {
         e.preventDefault();
+        console.log('submitting form  0');
         try {
+            console.log('submitting form  1');
             await handleLogin(); 
+            console.log('submitting form 2');
             navigate('/');     
         } catch (error) {
             console.error('Login failed:', error); 

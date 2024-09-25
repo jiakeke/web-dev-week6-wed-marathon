@@ -12,7 +12,8 @@ const SignupComponent = ({ setIsAuthenticated }) => {
   const membership_statusField = useField("text");
   const { signup } = useSignup(setIsAuthenticated);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (passwordField.value !== password2Field.value) {
       alert("Passwords do not match!");
       return;
@@ -28,12 +29,7 @@ const SignupComponent = ({ setIsAuthenticated }) => {
       membership_status: membership_statusField.value
     };
 
-    signup(newUser).then((user) => {
-      if (user) {
-        sessionStorage.setItem("user", JSON.stringify(user));
-        setIsAuthenticated(true);
-      }
-    });
+    signup(newUser);
   };
 
   return (

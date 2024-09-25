@@ -32,6 +32,7 @@ const signupUser = async (req, res) => {
       !date_of_birth ||
       !membership_status
     ) {
+      console.log("1");
       res.status(400);
       throw new Error("Please add all fields");
     }
@@ -39,6 +40,7 @@ const signupUser = async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (userExists) {
+      console.log("2");
       res.status(400);
       throw new Error("User already exists");
     }
@@ -59,14 +61,17 @@ const signupUser = async (req, res) => {
     });
 
     if (user) {
+      console.log("3");
       console.log(user._id);
      const token = generateToken(user._id);
       res.status(201).json({ email, token });
     } else {
+      console.log("4");
       res.status(400);
       throw new Error("Invalid user data");
     }
   } catch (error) {
+    console.log("5");
     res.status(400).json({ error: error.message });
   }
 };
