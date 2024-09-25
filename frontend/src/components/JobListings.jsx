@@ -12,16 +12,17 @@ const JobListings = ({ isHome = false }) => {
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
-        setJobs(data);
+        setJobs(Array.isArray(data) ? data : []);
       } catch (error) {
         console.log('Error fetching data', error);
+        setJobs([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchJobs();
-  }, []);
+  }, [isHome]);
 
   return (
     <section className='bg-blue-50 px-4 py-10'>
