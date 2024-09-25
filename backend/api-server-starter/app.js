@@ -10,6 +10,7 @@ const {
 } = require("./middleware/customMiddleware");
 const connectDB = require("./config/db");
 const cors = require("cors");
+const requireAuth = require("./middleware/requireAuth");
 
 // Middlewares
 app.use(cors());
@@ -20,6 +21,9 @@ connectDB();
 
 // Use the userRouter for all /users routes
 app.use("/api/users", userRouter);
+
+// Use Auth
+app.use(requireAuth);
 
 // Use the jobRouter for all /jobs routes
 app.use("/api/jobs", jobRouter);
