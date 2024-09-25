@@ -1,22 +1,8 @@
 {
   "jobs": [
     {
-      "id": "1",
-      "title": "Senior React Developer",
-      "type": "Full-Time",
-      "description": "We are seeking a talented Front-End Developer to join our team in Boston, MA. The ideal candidate will have strong skills in HTML, CSS, and JavaScript, with experience working with modern JavaScript frameworks such as React or Angular.",
-      "location": "Boston, MA",
-      "salary": "$70K - $80K",
-      "company": {
-        "name": "NewTek Solutions",
-        "description": "NewTek Solutions is a leading technology company specializing in web development and digital solutions. We pride ourselves on delivering high-quality products and services to our clients while fostering a collaborative and innovative work environment.",
-        "contactEmail": "contact@teksolutions.com",
-        "contactPhone": "555-555-5555"
-      }
-    },
-    {
       "id": "2",
-      "title": "Front-End Engineer (React & Redux)",
+      "title": "Front-End Engineer (React & Redux)ffffffffffffff",
       "type": "Full-Time",
       "location": "Miami, FL",
       "description": "Join our team as a Front-End Developer in sunny Miami, FL. We are looking for a motivated individual with a passion for crafting beautiful and responsive web applications. Experience with UI/UX design principles and a strong attention to detail are highly desirable.",
@@ -85,18 +71,32 @@
       }
     },
     {
-      "title": "be",
-      "type": "Full-Time",
-      "location": "s",
-      "description": "qadf",
+      "title": "123123",
+      "type": "Part-Time",
+      "location": "13123123",
+      "description": "12312312312",
       "salary": "Under $50K",
       "company": {
-        "name": "metropolia",
-        "description": "asdff",
-        "contactEmail": "lucas.qingyun@gmail.com",
-        "contactPhone": "0415771455"
+        "name": "123123123",
+        "description": "123123123123123",
+        "contactEmail": "123123123@gmail.com",
+        "contactPhone": "123123123123"
       },
-      "id": "hmgy4Eh"
+      "id": "E-coktZ"
+    },
+    {
+      "title": "adasd",
+      "type": "Full-Time",
+      "location": "asdasd",
+      "description": "adasdas",
+      "salary": "Under $50K",
+      "company": {
+        "name": "asdasd",
+        "description": "asdasda",
+        "contactEmail": "asdasdasd@gmail.com",
+        "contactPhone": "asdasd"
+      },
+      "id": "8PxUavl"
     }
   ]
 }
