@@ -1,19 +1,22 @@
 import useField from './useField';
+import axios from 'axios';
 
 const useLogin = () => {
-  const username = useField('text');
+  const email = useField('text');
   const password = useField('password');
+  console.log("nadaomeiyou",email, password);
 
   const handleLogin = async () => {
     try{
-        const response = await axios.post('/api/login/', {
-          username: username.value,
+        const response = await axios.post('/api/users/login/', {
+            email: email.value,
           password: password.value,
         });
+        console.log("nengnadaobu",response)   
 
         if(response.status === 200) {
-          localStorage.setItem('token', response.data.access);
-          localStorage.setItem('refresh', response.data.refresh);
+            console.log(response.data.token)
+          localStorage.setItem('token', response.data.token);
           window.location.replace('/');
         }else{
             console.error('Error logging in');  
@@ -25,7 +28,7 @@ const useLogin = () => {
   };
 
   return {
-    username,
+    email,
     password,
     handleLogin,
   };
