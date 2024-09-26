@@ -40,12 +40,12 @@ const Navbar = ({isAuthenticated
                 )}
                 
                 {isAuthenticated && (
-                  <div>
-                    <button onClick={handleClick}>Log out</button>
+                  <div >
+                    <button className='bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline' onClick={handleClick}>Log out</button>
                   </div>
                 )}
                 {!isAuthenticated && (
-                  <div>
+                  <div className='flex space-x-2'>
                 <NavLink to='/signup' className={linkClass}>
                   Sign up
                 </NavLink>
