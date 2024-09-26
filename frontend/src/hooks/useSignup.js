@@ -6,7 +6,7 @@ const useSignup = (setIsAuthenticated) => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const signup = async (name, email, password, phone_number, gender, date_of_birth, membership_status) => {
+  const signup = async ({ name, email, password, phone_number, gender, date_of_birth, membership_status }) => {
     setLoading(true);
     setError(null);
 
@@ -21,7 +21,7 @@ const useSignup = (setIsAuthenticated) => {
 
       if (response.ok) {
         const user = await response.json();
-        sessionStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", user.token);
         console.log("User signed up successfully!");
         setIsAuthenticated(true);
         navigate("/");

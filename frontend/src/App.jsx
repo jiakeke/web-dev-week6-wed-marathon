@@ -13,59 +13,89 @@ import AddJobPage from './pages/AddJobPage';
 import EditJobPage from './pages/EditJobPage';
 import SignupComponent from './components/Signup';
 import LoginPage from './pages/LoginPage';
+import { useState } from 'react';
 
 const App = () => {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    JSON.parse(localStorage.getItem("user")) || false
+  );
   // Add New Job
+
   const addJob = async (newJob) => {
-    const res = await fetch('/api/jobs', {
+    if(isAuthenticated){
+      const res = await fetch('/api/jobs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify(newJob),
+      
     });
+    }else{
+      navigate('/login');   
+    }
+    
     return;
   };
 
   // Delete Job
   const deleteJob = async (id) => {
-    const res = await fetch(`/api/jobs/${id}`, {
+
+    if(isAuthenticated){
+      const res = await fetch(`/api/jobs/${id}`, {
       method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     });
+    }
+    else{
+      navigate('/login');   
+    }
     return;
   };
 
   // Update Job
   const updateJob = async (job) => {
-    const res = await fetch(`/api/jobs/${job.id}`, {
+    if(isAuthenticated){
+      const res = await fetch(`/api/jobs/${job.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify(job),
-    });
+    });   
+    }else{
+      navigate('/login');   
+    }
     return;
   };
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={<MainLayout />}>
-        <Route index element={<HomePage />} />
-        <Route path='/jobs' element={<JobsPage />} />
-        <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob} />} />
+      <Route path='/' element={<MainLayout isAuthenticated={isAuthenticated}
+      setIsAuthenticated={setIsAuthenticated} />}>
+        <Route index element={<HomePage isAuthenticated={isAuthenticated} />} />
+        <Route path='/jobs' element={<JobsPage  isAuthenticated={isAuthenticated} />} />
+        <Route path='/add-job' element={<AddJobPage addJobSubmit={addJob}  />} />
         <Route
           path='/edit-job/:id'
-          element={<EditJobPage updateJobSubmit={updateJob} />}
+          element={<EditJobPage updateJobSubmit={updateJob}  />}
           loader={jobLoader}
         />
         <Route
           path='/jobs/:id'
-          element={<JobPage deleteJob={deleteJob} />}
+          element={<JobPage deleteJob={deleteJob}  />}
           loader={jobLoader}
         />
         <Route path='*' element={<NotFoundPage />} />
-        <Route path='/signup' element={<SignupComponent />} />
-        <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={<SignupComponent 
+          setIsAuthenticated={setIsAuthenticated}/>} />
+        <Route path='/login' element={<LoginPage 
+          setIsAuthenticated={setIsAuthenticated} />} />
       </Route>
     )
   );

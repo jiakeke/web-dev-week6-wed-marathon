@@ -111,8 +111,18 @@ const JobPage = ({ deleteJob }) => {
   );
 };
 
-const jobLoader = async ({ params }) => {
-  const res = await fetch(`/api/jobs/${params.id}`);
+const jobLoader = async ({ params ,isAuthenticated}) => {
+  if (!isAuthenticated) {
+    return { redirect: '/login' };
+  }
+  const res = await fetch(`/api/jobs/${params.id}`,{
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    body: JSON.stringify(job),
+  }); 
   const data = await res.json();
   return data;
 };

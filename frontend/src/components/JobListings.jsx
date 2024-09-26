@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import JobListing from './JobListing';
 import Spinner from './Spinner';
 
-const JobListings = ({ isHome = false }) => {
+const JobListings = ({ isHome = false ,isAuthenticated}) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -10,10 +10,17 @@ const JobListings = ({ isHome = false }) => {
     const fetchJobs = async () => {
       const apiUrl = isHome ? '/api/jobs?_limit=3' : '/api/jobs';
       try {
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        setJobs(Array.isArray(data) ? data : []);
-      } catch (error) {
+        if(isAuthenticated){
+          const res = await fetch(apiUrl, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+          const data = await res.json();
+          setJobs(Array.isArray(data) ? data : []);
+      
+      }
+    } catch (error) {
         console.log('Error fetching data', error);
         setJobs([]);
       } finally {
